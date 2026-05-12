@@ -1,11 +1,12 @@
 const container = document.querySelector(".container");
+let color = "black";
 
 function changeColor(div) {
-    div.style.backgroundColor = "black";
+    div.style.backgroundColor = color;
 }
 
 function fillWithDivs(div) {
-    for (i = 0; i < 300; i++){
+    for (i = 0; i < 100; i++){
         const newDiv = document.createElement("div");
         newDiv.classList.add("filling");
         div.appendChild(newDiv);
