@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-wrap:wrap;
+  border-style: solid;
+  max-width: 512px;
+}
+
+.box {
+  display: flex;
+  flex-wrap:wrap;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+  width: 30px;
+  height: 30px;
+}
+
+.filling {
+  display: flex;
+  width: 3px;
+  height: 3px;
+  background-color: whitesmoke;
+}
