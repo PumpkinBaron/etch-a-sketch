@@ -4,14 +4,15 @@ const container = document.querySelector(".container");
 const containerWidth = container.offsetWidth
 const button = document.createElement("button");
 button.textContent = "Click to resize grid.";
+button.classList.add("button");
 
 let color = "black"
+let boxNumber = 0;
 
 /* Functions */
 
-function changeColor(div) {
-    color = "#" + Math.floor(Math.random()*16777215).toString(16);
-    div.style.backgroundColor = color;
+function changeColor(div, newColor) {
+    div.style.backgroundColor = newColor;
 }
 
 function findFillSize(containerInput){
@@ -40,7 +41,8 @@ function findFillSize(containerInput){
 }
 
 function generateLine(
-    containerToFill, squareWidth, squaresPerLine, squareClass, squareColor) {
+    containerToFill, squareWidth, squaresPerLine, squareClass, squareColor, 
+    opacity) {
    console.log(`Running generate line with inputs
             containerToFill "${containerToFill}", square width "${squareWidth}", squares per line 
             "${squaresPerLine}", and class "${squareClass}".`)
@@ -50,27 +52,31 @@ function generateLine(
             newSquare.classList.add(squareClass);
             newSquare.style.width = squareWidth + "px";
             newSquare.style.height = squareWidth + "px";
-            newSquare.style.backgroundColor = squareColor;  
+            newSquare.style.backgroundColor = squareColor;
+            newSquare.style.opacity = opacity;
             lineOfSquares.appendChild(newSquare);
         }
         containerToFill.appendChild(lineOfSquares);
 }
 
-function fillWithGreySquares(containerToFill) {
+function fillWithSquares(containerToFill) {
         console.log("Filling container with grey squares...")
         const sizeInfo = findFillSize(containerToFill);
         const squareWidth = sizeInfo[0];
         const squaresPerLine = sizeInfo[1];
         const color = "whitesmoke";
-        console.log(`Running generate line via fillWithGreySquares with inputs
+        const currentBox = "boxnumber" + boxNumber;
+        console.log(`Running generate line via fillWithSquares with inputs
             container "${container}", square width "${squareWidth}", squares per line 
-            "${squaresPerLine}", and class "filling".`)
+            "${squaresPerLine}", and class ${currentBox}".`)
 
         for (let i = 0; i < squaresPerLine; i++ ) {
             generateLine(containerToFill, squareWidth, squaresPerLine, 
-                "filling", color);
+                currentBox, color, 0);
         }
+        boxNumber++;
 }
+
 
 function findAcceptableBoxWidth(squaresPerLine) {
         console.log("Finding acceptable box width...")
@@ -96,14 +102,15 @@ function generateGrid(squaresPerLine) {
         console.log(`Running generate line via generateGrid with inputs
             container "${container}", box width "${boxWidth}", squares per line 
             "${squaresPerLine}", and class "box".`)
-        generateLine(container, boxWidth, squaresPerLine, "box", "");
+        generateLine(container, boxWidth, squaresPerLine, "box", 0);
     }
     /* Fill the squares */
     const boxes = document.querySelectorAll(".box");
-    boxes.forEach(fillWithGreySquares);
+    boxes.forEach(fillWithSquares);
 
     /* Add a button */
     newPara = document.createElement("p");
+    newPara.classList.add("paragraph");
     container.appendChild(newPara);
     newPara.appendChild(button);
 }
@@ -112,9 +119,22 @@ function generateGrid(squaresPerLine) {
 
 container.addEventListener("mouseover", event => {
     const targetDiv = event.target;
-    if (targetDiv.className === "filling") {
+    const targetDivClass = targetDiv.className;
+    console.log(`TargetDivClass is ${targetDivClass}`);
+    if (targetDivClass.includes("boxnumber")) {
     console.log('Hover activated...');
-    changeColor(targetDiv); 
+    const currentColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+    const divClassArray = document.querySelectorAll("." + targetDivClass);
+   
+    divClassArray.forEach(currentDiv => {
+        console.log(`Current opacity is ${currentDiv.style.opacity}`);
+        changeColor(currentDiv, currentColor);
+        if (currentDiv.style.opacity < 1) {
+            currentDiv.style.opacity = Number(currentDiv.style.opacity) + .1;
+        }                
+    });
+    targetDiv.classList.remove(targetDivClass);
+    targetDiv.style.opacity = 1; 
     }
 });
 
