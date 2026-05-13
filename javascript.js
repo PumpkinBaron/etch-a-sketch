@@ -10,6 +10,7 @@ let color = "black"
 /* Functions */
 
 function changeColor(div) {
+    color = "#" + Math.floor(Math.random()*16777215).toString(16);
     div.style.backgroundColor = color;
 }
 
@@ -60,14 +61,14 @@ function fillWithGreySquares(containerToFill) {
         const sizeInfo = findFillSize(containerToFill);
         const squareWidth = sizeInfo[0];
         const squaresPerLine = sizeInfo[1];
-        const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+        const color = "whitesmoke";
         console.log(`Running generate line via fillWithGreySquares with inputs
             container "${container}", square width "${squareWidth}", squares per line 
             "${squaresPerLine}", and class "filling".`)
 
         for (let i = 0; i < squaresPerLine; i++ ) {
             generateLine(containerToFill, squareWidth, squaresPerLine, 
-                "filling", randomColor);
+                "filling", color);
         }
 }
 
