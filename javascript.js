@@ -39,7 +39,7 @@ function findFillSize(containerInput){
 }
 
 function generateLine(
-    containerToFill, squareWidth, squaresPerLine, squareClass) {
+    containerToFill, squareWidth, squaresPerLine, squareClass, squareColor) {
    console.log(`Running generate line with inputs
             containerToFill "${containerToFill}", square width "${squareWidth}", squares per line 
             "${squaresPerLine}", and class "${squareClass}".`)
@@ -48,7 +48,8 @@ function generateLine(
             const newSquare = document.createElement("div");
             newSquare.classList.add(squareClass);
             newSquare.style.width = squareWidth + "px";
-            newSquare.style.height = squareWidth + "px";  
+            newSquare.style.height = squareWidth + "px";
+            newSquare.style.backgroundColor = squareColor;  
             lineOfSquares.appendChild(newSquare);
         }
         containerToFill.appendChild(lineOfSquares);
@@ -59,12 +60,14 @@ function fillWithGreySquares(containerToFill) {
         const sizeInfo = findFillSize(containerToFill);
         const squareWidth = sizeInfo[0];
         const squaresPerLine = sizeInfo[1];
+        const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
         console.log(`Running generate line via fillWithGreySquares with inputs
             container "${container}", square width "${squareWidth}", squares per line 
             "${squaresPerLine}", and class "filling".`)
 
         for (let i = 0; i < squaresPerLine; i++ ) {
-            generateLine(containerToFill, squareWidth, squaresPerLine, "filling");
+            generateLine(containerToFill, squareWidth, squaresPerLine, 
+                "filling", randomColor);
         }
 }
 
@@ -92,7 +95,7 @@ function generateGrid(squaresPerLine) {
         console.log(`Running generate line via generateGrid with inputs
             container "${container}", box width "${boxWidth}", squares per line 
             "${squaresPerLine}", and class "box".`)
-        generateLine(container, boxWidth, squaresPerLine, "box");
+        generateLine(container, boxWidth, squaresPerLine, "box", "");
     }
     /* Fill the squares */
     const boxes = document.querySelectorAll(".box");
