@@ -45,8 +45,8 @@ function generateLine(
     containerToFill, squareWidth, squaresPerLine, squareClass, squareColor, 
     opacity) {
    console.log(`Running generate line with inputs
-            containerToFill "${containerToFill}", square width "${squareWidth}", squares per line 
-            "${squaresPerLine}", and class "${squareClass}".`)
+            containerToFill "${containerToFill}", square width "${squareWidth}", 
+            squares per line "${squaresPerLine}", and class "${squareClass}".`)
         const lineOfSquares = document.createElement("div");
         for (let i = 0; i < squaresPerLine; i++ ) {
             const newSquare = document.createElement("div");
@@ -68,8 +68,8 @@ function fillWithSquares(containerToFill) {
         const color = "whitesmoke";
         const currentBox = "boxnumber" + boxNumber;
         console.log(`Running generate line via fillWithSquares with inputs
-            container "${container}", square width "${squareWidth}", squares per line 
-            "${squaresPerLine}", and class ${currentBox}".`)
+            container "${container}", square width "${squareWidth}", squares 
+            per line "${squaresPerLine}", and class ${currentBox}".`)
 
         for (let i = 0; i < squaresPerLine; i++ ) {
             generateLine(containerToFill, squareWidth, squaresPerLine, 
@@ -87,7 +87,8 @@ function findAcceptableBoxWidth(squaresPerLine) {
             borderlessWidth % 5 === 0)) {
                 console.log(`Current border with is ${borderlessWidth}`);
                 borderlessWidth--;
-                if (borderlessWidth < 1) console.error("borderless width went below 1");
+                if (borderlessWidth < 1) console.error(`borderless
+                     width went below 1`);
             }
             return borderlessWidth + 2;
 }
