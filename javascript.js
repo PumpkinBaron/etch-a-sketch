@@ -141,7 +141,8 @@ button.addEventListener("click", () => {
         numberOfSquares = Number(window.prompt(`How many squares per line? 
             Input a number between 1 and 100`, ""));
         console.log(`Number of squares changed to ${numberOfSquares}`)
-        } while (!Number.isInteger(numberOfSquares))
+        } while (!Number.isInteger(numberOfSquares) || numberOfSquares < 1 ||
+                    numberOfSquares > 100)
         generateGrid(numberOfSquares);
 });
 
