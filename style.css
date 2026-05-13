@@ -1,7 +1,14 @@
+body {
+  display: flex;
+  flex-direction: column;
+  width: 512px;
+  justify-content: space-between;
+}
+
 .container {
   display: flex;
   width: 512px;
-  height: 512px;  
+  height: 552px;  
 }
 
 .box {

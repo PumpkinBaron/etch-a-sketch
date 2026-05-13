@@ -5,7 +5,8 @@ const containerWidth = container.offsetWidth
 const button = document.createElement("button");
 button.textContent = "Click to resize grid.";
 button.classList.add("button");
-
+button.style.width = "200px";
+button.style.height = "50px";
 let color = "black"
 let boxNumber = 0;
 
@@ -109,10 +110,7 @@ function generateGrid(squaresPerLine) {
     boxes.forEach(fillWithSquares);
 
     /* Add a button */
-    newPara = document.createElement("p");
-    newPara.classList.add("paragraph");
-    container.appendChild(newPara);
-    newPara.appendChild(button);
+    document.querySelector("body").appendChild(button);
 }
 
 /* Event Listeners */
